@@ -1,10 +1,12 @@
 import { PencilRuler, MessagesSquare, FileCheck2 } from 'lucide-react'
 import { Container } from '@/components/common/Container'
-import { developmentChips } from '@/data/landing'
+import { useI18n } from '@/i18n/useI18n'
 
 const chipIcons = [PencilRuler, MessagesSquare, FileCheck2]
 
 export function DevelopmentBanner() {
+  const { t } = useI18n()
+
   return (
     <section id="development" className="relative overflow-hidden bg-blue-soft py-14">
       {/* building silhouettes */}
@@ -16,17 +18,14 @@ export function DevelopmentBanner() {
             <CraneIllustration />
             <div className="max-w-md">
               <h2 className="text-2xl font-extrabold tracking-tight text-navy">
-                eBud is in active development.
+                {t.development.title}
               </h2>
-              <p className="mt-2 text-sm text-navy/70">
-                We’re building a better way to manage construction projects from
-                the ground up.
-              </p>
+              <p className="mt-2 text-sm text-navy/70">{t.development.description}</p>
             </div>
           </div>
 
           <ul className="grid w-full grid-cols-1 gap-3 sm:grid-cols-3 lg:w-auto">
-            {developmentChips.map((chip, index) => {
+            {t.development.chips.map((chip, index) => {
               const Icon = chipIcons[index] ?? PencilRuler
               return (
                 <li
@@ -42,7 +41,7 @@ export function DevelopmentBanner() {
         </div>
 
         <p className="mt-10 text-center text-sm font-medium text-navy/60">
-          Landing page concept / product preview
+          {t.development.footnote}
         </p>
       </Container>
     </section>

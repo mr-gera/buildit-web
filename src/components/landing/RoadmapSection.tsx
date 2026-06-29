@@ -1,17 +1,21 @@
 import { Container } from '@/components/common/Container'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { Badge } from '@/components/common/Badge'
-import { roadmapItems } from '@/data/landing'
+import { useI18n } from '@/i18n/useI18n'
+import { useLanding } from '@/i18n/useLanding'
 import { accentChip } from '@/lib/utils/accent'
 import { cn } from '@/lib/utils/cn'
 
 export function RoadmapSection() {
+  const { t } = useI18n()
+  const { roadmapItems } = useLanding()
+
   return (
     <section id="roadmap" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
-          title="Product roadmap"
-          eyebrow={<Badge variant="orange">MVP in progress</Badge>}
+          title={t.roadmap.heading}
+          eyebrow={<Badge variant="orange">{t.roadmap.eyebrow}</Badge>}
         />
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -38,7 +42,7 @@ export function RoadmapSection() {
         </div>
 
         <p className="mt-8 text-center text-xs text-text-muted">
-          The roadmap is informational and may change as the product evolves.
+          {t.roadmap.footnote}
         </p>
       </Container>
     </section>

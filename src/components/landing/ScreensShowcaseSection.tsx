@@ -1,15 +1,19 @@
 import { Container } from '@/components/common/Container'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { PhoneMockup } from '@/components/common/PhoneMockup'
-import { featureScreens } from '@/data/landing'
+import { useI18n } from '@/i18n/useI18n'
+import { useLanding } from '@/i18n/useLanding'
 import { accentChip } from '@/lib/utils/accent'
 import { cn } from '@/lib/utils/cn'
 
 export function ScreensShowcaseSection() {
+  const { t } = useI18n()
+  const { featureScreens } = useLanding()
+
   return (
     <section id="screens" className="bg-slate-50/60 py-16 sm:py-20">
       <Container>
-        <SectionHeading title="A complete workflow in one app" />
+        <SectionHeading title={t.screens.heading} />
 
         <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {featureScreens.map(({ icon: Icon, title, subtitle, image, alt }) => (

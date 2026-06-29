@@ -1,14 +1,18 @@
 import { Container } from '@/components/common/Container'
 import { SectionHeading } from '@/components/common/SectionHeading'
-import { problemCards } from '@/data/landing'
+import { useI18n } from '@/i18n/useI18n'
+import { useLanding } from '@/i18n/useLanding'
 import { accentChip } from '@/lib/utils/accent'
 import { cn } from '@/lib/utils/cn'
 
 export function ProblemSection() {
+  const { t } = useI18n()
+  const { problemCards } = useLanding()
+
   return (
     <section id="features" className="py-16 sm:py-20">
       <Container>
-        <SectionHeading title="eBud for the realities of construction" />
+        <SectionHeading title={t.problem.heading} />
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {problemCards.map(({ icon: Icon, accent, title, text }) => (

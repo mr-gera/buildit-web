@@ -1,15 +1,19 @@
 import { Check } from 'lucide-react'
 import { Container } from '@/components/common/Container'
 import { SectionHeading } from '@/components/common/SectionHeading'
-import { roleCards } from '@/data/landing'
+import { useI18n } from '@/i18n/useI18n'
+import { useLanding } from '@/i18n/useLanding'
 import { accentChip } from '@/lib/utils/accent'
 import { cn } from '@/lib/utils/cn'
 
 export function RolesSection() {
+  const { t } = useI18n()
+  const { roleCards } = useLanding()
+
   return (
     <section id="roles" className="py-16 sm:py-20">
       <Container>
-        <SectionHeading title="Built for every role on site" />
+        <SectionHeading title={t.roles.heading} />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {roleCards.map(({ icon: Icon, accent, title, description, bullets }) => (

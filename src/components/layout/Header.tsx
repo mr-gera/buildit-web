@@ -3,16 +3,19 @@ import { Menu, X } from 'lucide-react'
 import { Container } from '@/components/common/Container'
 import { Badge } from '@/components/common/Badge'
 import { Logo } from '@/components/layout/Logo'
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { landingNav } from '@/config/navigation'
+import { useI18n } from '@/i18n/useI18n'
 import { cn } from '@/lib/utils/cn'
 
 export function Header() {
+  const { t } = useI18n()
   const [open, setOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-50 border-b border-border-soft/70 bg-white/85 backdrop-blur">
-      <Container as="nav" aria-label="Primary" className="flex h-16 items-center justify-between gap-4">
-        <a href="#top" className="shrink-0" aria-label="eBud home">
+      <Container as="nav" aria-label={t.common.primaryNavAria} className="flex h-16 items-center justify-between gap-4">
+        <a href="#top" className="shrink-0" aria-label={t.common.homeAria}>
           <Logo />
         </a>
 
@@ -24,28 +27,33 @@ export function Header() {
                 href={item.href}
                 className="text-sm font-medium text-navy/80 transition-colors hover:text-orange"
               >
-                {item.label}
+                {t.nav[item.key]}
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="hidden md:block">
-          <Badge variant="status" withDot>
-            In Development
-          </Badge>
-        </div>
+        {/* Right side — status, language and mobile toggle */}
+        <div className="flex items-center gap-3">
+          <div className="hidden md:block">
+            <Badge variant="status" withDot>
+              {t.common.inDevelopment}
+            </Badge>
+          </div>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-navy md:hidden"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+          <LanguageSwitcher />
+
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-navy md:hidden"
+            aria-label={open ? t.common.closeMenu : t.common.openMenu}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </Container>
 
       {/* Mobile menu */}
@@ -63,12 +71,12 @@ export function Header() {
               onClick={() => setOpen(false)}
               className="rounded-lg px-2 py-2.5 text-sm font-medium text-navy/80 hover:bg-slate-50 hover:text-orange"
             >
-              {item.label}
+              {t.nav[item.key]}
             </a>
           ))}
           <div className="px-2 py-2">
             <Badge variant="status" withDot>
-              In Development
+              {t.common.inDevelopment}
             </Badge>
           </div>
         </Container>
